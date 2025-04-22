@@ -1,0 +1,218 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+}
+
+.header {
+    background-color: #e64e4e;
+    height: 15px;
+    width: 100%;
+}
+
+.content {
+    background-color: #689fdd;
+    padding: 50px;
+    color: black;
+}
+
+.form-row {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-row label {
+    font-size: 22px;
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+input[type="text"], input[type="date"] {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    width: 200px;
+    max-width: 100%;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: white;
+    margin: 30px 0;
+}
+
+.turma-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    font-size: 18px;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+table td {
+    padding: 8px 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.aluno-nome {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.numero {
+    width: 30px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.attendance-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid black;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.attendance-circle.filled {
+    background-color: black;
+}
+
+.circle-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-container {
+    display: flex;
+    align-items: center;
+    margin: 0 8px;
+}
+
+.periodo-circles, .turno-circles {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Media Queries para Responsividade */
+@media screen and (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .form-row label {
+        margin-bottom: 8px;
+    }
+    
+    .periodo-circles, .turno-circles {
+        margin-top: 10px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .circle-container {
+        margin: 5px;
+    }
+    
+    .aluno-nome {
+        font-size: 14px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    .attendance-circle {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content {
+        padding: 10px;
+    }
+    
+    .periodo-circles {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    .turno-circles {
+        margin-left: 0;
+    }
+    
+    table th {
+        font-size: 14px;
+        padding: 5px 2px;
+    }
+    
+    table td {
+        padding: 5px 2px;
+    }
+    
+    .aluno-nome {
+        font-size: 12px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .attendance-circle {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .turma-title {
+        font-size: 20px;
+    }
+}
+
+ input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+ }
+input[type="submit"] {
+    background-color: #3a63d4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    
+}
+input[type="submit"]:hover {
+    background-color: #3a63d4;
+}
+.botao{
+    margin-left: 735px;
+    margin-top: 10px ;
+}    
+h1{
+    color: #333;
+    font-size:2em;
+    text-align: center;
+}

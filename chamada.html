@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamada CETEC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="content">
+        <div class="form-row">
+            <label for="data">Data:</label>
+            <input type="date" id="data" placeholder="dd/mm/aaaa">
+        </div>
+        
+        <div class="form-row">
+            <label for="periodo">Período:</label>
+            <div class="periodo-circles">
+                <div class="circle-container">
+                    <span>1°</span>
+                    <div class="attendance-circle filled" onclick="toggleCircle(this)"></div>
+                </div>
+                <div class="circle-container">
+                    <span>2°</span>
+                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                </div>
+                <div class="circle-container">
+                    <span>3°</span>
+                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                </div>
+                <div class="circle-container">
+                    <span>4°</span>
+                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                </div>
+                <div class="circle-container">
+                    <span>5°</span>
+                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="disciplina">Disciplina:</label>
+            <input type="text" id="disciplina">
+        </div>
+        
+        <div class="form-row">
+            <label for="turno">Turno:</label>
+            <div class="turno-circles">
+                <div class="circle-container">
+                    <span>Manhã</span>
+                    <div class="attendance-circle filled" onclick="toggleCircle(this)"></div>
+                </div>
+                <div class="circle-container">
+                    <span>Tarde</span>
+                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <div class="turma-title">TURMA GAMA 3</div>
+        
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;"></th>
+                        <th style="width: 30%;">Aluno</th>
+                        <th>1°</th>
+                        <th>2°</th>
+                        <th>3°</th>
+                        <th>4°</th>
+                        <th>5°</th>
+                    </tr>
+                </thead>
+                <tbody id="alunos-lista">
+                    <!-- Os alunos serão adicionados aqui via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Lista de alunos
+        const alunos = [
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto",
+            "Maria Thereza Adamatti Rizzotto"
+        ];
+        
+        // Função para alternar entre os estados do círculo
+        function toggleCircle(element) {
+            element.classList.toggle('filled');
+        }
+        
+        // Função para preencher a tabela com os alunos
+        function preencherTabela() {
+            const tbody = document.getElementById('alunos-lista');
+            
+            alunos.forEach((aluno, index) => {
+                const tr = document.createElement('tr');
+                
+                // Coluna do número
+                const tdNum = document.createElement('td');
+                tdNum.className = 'numero';
+                tdNum.textContent = '1.';
+                tr.appendChild(tdNum);
+                
+                // Coluna do nome
+                const tdNome = document.createElement('td');
+                tdNome.className = 'aluno-nome';
+                tdNome.textContent = aluno;
+                tr.appendChild(tdNome);
+                
+                // Colunas para os períodos (5 círculos)
+                for (let i = 0; i < 5; i++) {
+                    const td = document.createElement('td');
+                    const circle = document.createElement('div');
+                    circle.className = 'attendance-circle';
+                    circle.onclick = function() { toggleCircle(this); };
+                    td.appendChild(circle);
+                    tr.appendChild(td);
+                }
+                
+                tbody.appendChild(tr);
+            });
+        }
+        
+        // Ajustar a interface com base no tamanho da tela
+        function ajustarInterface() {
+            const width = window.innerWidth;
+            const circleContainers = document.querySelectorAll('.circle-container');
+            
+            if (width <= 480) {
+                // Adicionar tooltips para nomes longos em telas pequenas
+                const nomes = document.querySelectorAll('.aluno-nome');
+                nomes.forEach(nome => {
+                    nome.title = nome.textContent;
+                });
+            }
+        }
+        
+        // Inicializar a página
+        window.onload = function() {
+            preencherTabela();
+            ajustarInterface();
+            
+            // Definir data atual
+            const hoje = new Date();
+            const dataFormatada = hoje.toISOString().substr(0, 10);
+            document.getElementById('data').value = dataFormatada;
+        };
+        
+        // Ajustar quando a janela for redimensionada
+        window.addEventListener('resize', ajustarInterface);
+    </script>
+</body>
+</html>
