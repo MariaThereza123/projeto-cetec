@@ -1,26 +1,24 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #689fdd;
+    background-color: #71a5df;
 }
 
 .header {
-    background-color: #e64e4e;
+    background-color: #f14b4b;
     height: 15px;
     width: 100%;
 }
 
 .content {
-    background-color: #689fdd;
-    padding: 50px;
+    background-color: #71a5df;
+    padding: 20px;
     color: black;
 }
-
 .content1 {
-    background-color: #689fdd;
-    padding: 150px;
+    background-color: #71a5df;
+    padding: 100px;
     color: black;
 }
 
@@ -37,12 +35,17 @@ body {
     min-width: 100px;
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"], input[type="date"], select {
     padding: 8px;
     font-size: 16px;
     border: none;
     width: 200px;
     max-width: 100%;
+}
+
+select {
+    background-color: white;
+    cursor: pointer;
 }
 
 hr {
@@ -194,6 +197,7 @@ table td {
     .turma-title {
         font-size: 20px;
     }
+
 }
 
  input[type="email"], input[type="password"], input[type="turma"]{

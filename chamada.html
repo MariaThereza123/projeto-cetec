@@ -17,45 +17,60 @@
         
         <div class="form-row">
             <label for="periodo">Período:</label>
-            <div class="periodo-circles">
+            <div class="periodo-circles" id="periodo-container">
                 <div class="circle-container">
                     <span>1°</span>
-                    <div class="attendance-circle filled" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle filled" data-periodo="1" onclick="togglePeriodo(this)"></div>
                 </div>
                 <div class="circle-container">
                     <span>2°</span>
-                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle" data-periodo="2" onclick="togglePeriodo(this)"></div>
                 </div>
                 <div class="circle-container">
                     <span>3°</span>
-                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle" data-periodo="3" onclick="togglePeriodo(this)"></div>
                 </div>
                 <div class="circle-container">
                     <span>4°</span>
-                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle" data-periodo="4" onclick="togglePeriodo(this)"></div>
                 </div>
                 <div class="circle-container">
                     <span>5°</span>
-                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle" data-periodo="5" onclick="togglePeriodo(this)"></div>
                 </div>
             </div>
         </div>
         
         <div class="form-row">
             <label for="disciplina">Disciplina:</label>
-            <input type="text" id="disciplina">
+            <select id="disciplina">
+                <option value="">Selecione uma disciplina</option>
+                <option value="matematica">Matemática</option>
+                <option value="portugues">Português</option>
+                <option value="ciencias">Ciências</option>
+                <option value="historia">História</option>
+                <option value="geografia">Geografia</option>
+                <option value="ingles">Inglês</option>
+                <option value="educacaoFisica">Educação Física</option>
+                <option value="artes">Artes</option>
+                <option value="fisica">Física</option>
+                <option value="quimica">Química</option>
+                <option value="biologia">Biologia</option>
+                <option value="filosofia">Filosofia</option>
+                <option value="sociologia">Sociologia</option>
+            </select>
         </div>
         
         <div class="form-row">
             <label for="turno">Turno:</label>
-            <div class="turno-circles">
+            <div class="turno-circles" id="turno-container">
                 <div class="circle-container">
                     <span>Manhã</span>
-                    <div class="attendance-circle filled" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle filled" data-turno="manha" onclick="toggleTurno(this)"></div>
                 </div>
                 <div class="circle-container">
                     <span>Tarde</span>
-                    <div class="attendance-circle" onclick="toggleCircle(this)"></div>
+                    <div class="attendance-circle" data-turno="tarde" onclick="toggleTurno(this)"></div>
                 </div>
             </div>
         </div>
@@ -102,16 +117,47 @@
             "Maria Thereza Adamatti Rizzotto"
         ];
         
-        // Função para alternar entre os estados do círculo
-        function toggleCircle(element) {
-            element.classList.toggle('filled');
+        // Função para alternar períodos (somente um selecionável)
+        function togglePeriodo(elemento) {
+            // Remover classe 'filled' de todos os períodos
+            const periodos = document.querySelectorAll('#periodo-container .attendance-circle');
+            periodos.forEach(circulo => {
+                circulo.classList.remove('filled');
+            });
+            
+            // Adicionar classe 'filled' ao período clicado
+            elemento.classList.add('filled');
+        }
+        
+        // Função para alternar turnos (somente um selecionável)
+        function toggleTurno(elemento) {
+            // Remover classe 'filled' de todos os turnos
+            const turnos = document.querySelectorAll('#turno-container .attendance-circle');
+            turnos.forEach(circulo => {
+                circulo.classList.remove('filled');
+            });
+            
+            // Adicionar classe 'filled' ao turno clicado
+            elemento.classList.add('filled');
+        }
+        
+        // Função para alternar presença do aluno em determinado período (somente um por linha)
+        function togglePresenca(elemento, alunoIndex, periodoIndex) {
+            // Remover classe 'filled' de todos os períodos para este aluno
+            const periodos = document.querySelectorAll(`.presenca-aluno-${alunoIndex}`);
+            periodos.forEach(circulo => {
+                circulo.classList.remove('filled');
+            });
+            
+            // Adicionar classe 'filled' ao período clicado
+            elemento.classList.add('filled');
         }
         
         // Função para preencher a tabela com os alunos
         function preencherTabela() {
             const tbody = document.getElementById('alunos-lista');
             
-            alunos.forEach((aluno, index) => {
+            alunos.forEach((aluno, alunoIndex) => {
                 const tr = document.createElement('tr');
                 
                 // Coluna do número
@@ -127,11 +173,13 @@
                 tr.appendChild(tdNome);
                 
                 // Colunas para os períodos (5 círculos)
-                for (let i = 0; i < 5; i++) {
+                for (let periodoIndex = 0; periodoIndex < 5; periodoIndex++) {
                     const td = document.createElement('td');
                     const circle = document.createElement('div');
-                    circle.className = 'attendance-circle';
-                    circle.onclick = function() { toggleCircle(this); };
+                    circle.className = `attendance-circle presenca-aluno-${alunoIndex}`;
+                    circle.onclick = function() { 
+                        togglePresenca(this, alunoIndex, periodoIndex); 
+                    };
                     td.appendChild(circle);
                     tr.appendChild(td);
                 }
@@ -143,7 +191,6 @@
         // Ajustar a interface com base no tamanho da tela
         function ajustarInterface() {
             const width = window.innerWidth;
-            const circleContainers = document.querySelectorAll('.circle-container');
             
             if (width <= 480) {
                 // Adicionar tooltips para nomes longos em telas pequenas
