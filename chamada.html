@@ -194,7 +194,7 @@
         function selecionarStatus(status) {
             if (circuloAtual) {
                 // Remover todas as classes de status
-                circuloAtual.classList.remove('presente', 'falta', 'justificado', 'filled');
+                circuloAtual.classList.remove('falta', 'saiu', 'entrou', 'filled');
                 
                 // Adicionar a nova classe conforme o status selecionado
                 circuloAtual.classList.add(status);
@@ -227,7 +227,7 @@
                 for (let periodoIndex = 0; periodoIndex < 5; periodoIndex++) {
                     const td = document.createElement('td');
                     const circle = document.createElement('div');
-                    circle.className = `attendance-circle presenca-aluno-${alunoIndex}`;
+                    circle.className = `attendance-circle falta-aluno-${alunoIndex}`;
                     circle.onclick = function() { 
                         abrirModalOpcoes(this, alunoIndex, periodoIndex); 
                     };
