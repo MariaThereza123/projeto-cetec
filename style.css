@@ -302,9 +302,13 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #3a63d4;
 }
-.botao{
-    margin-left: 735px;
-    margin-top: 10px ;
+.button{
+    background-color: blue; 
+    color: white; 
+    padding: 10px 10px; 
+    border: none; 
+    width: 100px; 
+    height: 100px;
 }    
 h1{
     color: #333;
