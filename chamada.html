@@ -104,6 +104,10 @@
         <div class="modal-conteudo">
             <div class="modal-titulo">Selecione o status:</div>
             <div class="modal-opcoes-lista">
+                <button class="opcao-botao presença-btn" onclick="selecionarStatus('presença')">
+                    <div class="cor-exemplo" style="background-color: #0ac23e;"></div>
+                    <span>Presença</span>
+                </button>
                 <button class="opcao-botao falta-btn" onclick="selecionarStatus('falta')">
                     <div class="cor-exemplo" style="background-color: #a70b0b;"></div>
                     <span>Falta</span>
@@ -113,7 +117,7 @@
                     <span>Saiu com Autorização</span>
                 </button>
                 <button class="opcao-botao entrou-btn" onclick="selecionarStatus('entrou')">
-                    <div class="cor-exemplo" style="background-color: #0ce517;"></div>
+                    <div class="cor-exemplo" style="background-color: #f0f404;"></div>
                     <span>Entrou com Autorização</span>
                 </button>
             </div>
@@ -174,7 +178,7 @@
             const circulos = document.querySelectorAll(`.presenca-aluno-${alunoIndex}`);
             circulos.forEach(circulo => {
                 if (circulo !== elemento) {
-                    circulo.classList.remove('falta', 'saiu', 'entrou');
+                    circulo.classList.remove('presença','falta', 'saiu', 'entrou');
                 }
             });
             
@@ -194,7 +198,7 @@
         function selecionarStatus(status) {
             if (circuloAtual) {
                 // Remover todas as classes de status
-                circuloAtual.classList.remove('falta', 'saiu', 'entrou', 'filled');
+                circuloAtual.classList.remove('presença','falta', 'saiu', 'entrou', 'filled');
                 
                 // Adicionar a nova classe conforme o status selecionado
                 circuloAtual.classList.add(status);
